@@ -37,6 +37,26 @@ public class VarastoTest {
         // saldon pitäisi olla sama kun lisätty määrä
         assertEquals(8, varasto.getSaldo(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void lisaysLisaaSaldoaNegatiivinenLuku() {
+        double expectedSaldo = varasto.getSaldo();
+        varasto.lisaaVarastoon(-2);
+
+        // saldon ei pitäisi olla muuttunut
+        assertEquals(expectedSaldo, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaysLisaaSaldoaEnemmanKuinMahtuu() {
+        double paljonkoMahtuu = varasto.paljonkoMahtuu();
+        varasto.lisaaVarastoon(paljonkoMahtuu + 2);
+
+        // saldon pitäisi olla sama kuin tilavuus
+        assertEquals(varasto.getTilavuus(), varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    
 
     @Test
     public void lisaysLisaaPienentaaVapaataTilaa() {
@@ -63,6 +83,29 @@ public class VarastoTest {
 
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void ottaminenVarastostaNegatiivinen() {
+        varasto.lisaaVarastoon(8);
+        double expectedResult = varasto.getSaldo();
+
+        varasto.otaVarastosta(-4);
+
+        // varastoston määrän pitäisi olla sama kuin ennen ottamista
+        assertEquals(expectedResult, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void ottaminenVarastostaEnemmanKuinOn() {
+        double tyhja = 0;
+        varasto.lisaaVarastoon(8);
+        double varastossaNyt = varasto.getSaldo();
+
+        varasto.otaVarastosta(varastossaNyt + 6);
+
+        // varastoston määrän pitäisi olla tyhja
+        assertEquals(tyhja, varasto.getSaldo(), vertailuTarkkuus);
     }
 
     @Test
