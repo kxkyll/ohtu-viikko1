@@ -98,8 +98,7 @@ public class VarastoTest {
     
     @Test
     public void ottaminenVarastostaEnemmanKuinOn() {
-        //double tyhja = 0;
-        double tyhja = 1;
+        double tyhja = 0;
         varasto.lisaaVarastoon(8);
         double varastossaNyt = varasto.getSaldo();
 
