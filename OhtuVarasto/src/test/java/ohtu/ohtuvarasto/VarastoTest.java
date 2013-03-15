@@ -42,6 +42,17 @@ public class VarastoTest {
     }
     
     @Test
+    public void lisaysLisaaSaldoaNollalla() {
+        double expectedSaldo = varasto.getSaldo();
+        varasto.lisaaVarastoon(0);
+
+        // saldon pitäisi olla sama kuin ennen lisäystä
+        
+        assertEquals(expectedSaldo, varasto.getSaldo(), vertailuTarkkuus);
+        
+    }
+    
+    @Test
     public void lisaysLisaaSaldoaNegatiivinenLuku() {
         double expectedSaldo = varasto.getSaldo();
         varasto.lisaaVarastoon(-2);
